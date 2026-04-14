@@ -1,0 +1,5 @@
+{
+  "name": "Modern Dashboard",
+  "description": "A sleek, multi-purpose dashboard with real-time news, weather, time, and notifications.",
+  "requestFramePermissions": ["microphone", "notifications", "geolocation"]
+}
