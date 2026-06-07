@@ -1,8 +1,44 @@
+```gitignore
+# Dependencies
 node_modules/
-build/
+
+# Build outputs
 dist/
-coverage/
-.DS_Store
+build/
+*.js.map
+*.ts.map
+
+# Logs and temp files
 *.log
-.env*
-!.env.example
+*.tmp
+
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Distribution / packaging
+*.tar.gz
+*.whl
+*.egg
+*.egg-info/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+```

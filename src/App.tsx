@@ -9,7 +9,18 @@ import {
   ExternalLink, Users, Clock, Newspaper, LayoutDashboard, 
   ChevronRight, ChevronLeft, Volume2, Music, Check, MoreVertical, MapPin, Wind, Droplets, Battery, Wifi,
   Send, Bot, Loader2, BarChart3, ArrowUpRight, ArrowDownRight, DollarSign,
-  Layout, ArrowUp, ArrowDown, GripVertical
+  Layout, ArrowUp, ArrowDown, GripVertical, Image as ImageIcon, Palette, Moon, Star,
+  Globe, Activity, Award, Bookmark, Play, Pause, SkipForward, Heart, Shuffle, Repeat,
+  Mic, Video, Phone, Mail, Shield, CreditCard, FileText, Folder, Download, Upload,
+  Maximize2, Minimize2, Grid, List, Filter, SortAsc, Trash2, Edit3, Plus, Minus,
+  Cpu, HardDrive, Server, Radio, Satellite, Compass, Target, Eye, Fingerprint,
+  GitBranch, Layers, Box, Hexagon, Circle, Triangle, Square, Diamond,
+  Flame, Snowflake, Umbrella, Sunset, Sunrise, Navigation, Home, Briefcase,
+  Coffee, Music2, Film, Gamepad2, BookOpen, GraduationCap, Dumbbell, Car,
+  Plane, Train, Ship, Bike, Footprints, Rocket, Telescope, Microscope, Atom,
+  DNA, Pill, Stethoscope, Hospital, Ambulance, Banknote, Coins, PieChart,
+  LineChart, AreaChart, BarChart, CandlestickChart, TrendingDown, Percent,
+  Wallet, ShoppingCart, Tag, Gift, Gem, Crown, Trophy, Medal, Ribbon
 } from "lucide-react";
 import { cn } from './lib/utils';
 import { getGeminiResponse } from './services/geminiService';
@@ -89,12 +100,30 @@ interface AppTheme {
 const THEME: AppTheme = {
   name: "Modern",
   accentColor: "text-blue-500",
-  gradient: "from-blue-500 to-indigo-600",
-  subtleGradient: "from-blue-500/10 to-indigo-600/10",
+  gradient: "from-blue-500 via-purple-500 to-pink-500",
+  subtleGradient: "from-blue-500/10 via-purple-500/10 to-pink-500/10",
   borderColor: "border-blue-500/20",
   glowColor: "shadow-blue-500/20",
-  bgAccent: "bg-blue-500"
+  bgAccent: "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
 };
+
+// HD Background Images for different sections
+const HD_BACKGROUNDS = {
+  hero: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+  news: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop",
+  weather: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=1965&auto=format&fit=crop",
+  markets: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop",
+  calendar: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=2068&auto=format&fit=crop",
+  settings: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
+};
+
+// Animated gradient backgrounds
+const GRADIENT_ANIMATIONS = [
+  "from-blue-600 via-purple-600 to-pink-600",
+  "from-emerald-500 via-teal-500 to-cyan-500",
+  "from-orange-500 via-red-500 to-pink-500",
+  "from-violet-500 via-purple-500 to-fuchsia-500",
+];
 
 // --- Main Component ---
 
@@ -400,22 +429,44 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-blue-500/30 overflow-hidden flex flex-col">
-      {/* Background Accents */}
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-blue-500/30 overflow-hidden flex flex-col relative">
+      {/* Enhanced Background with HD imagery and animated gradients */}
       <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full animate-pulse"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full animate-pulse [animation-delay:2s]"></div>
+        {/* Main gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 animate-pulse"></div>
+        
+        {/* Animated orb effects */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-gradient-to-r from-blue-600/20 to-cyan-600/20 blur-[150px] rounded-full animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-l from-purple-600/20 to-pink-600/20 blur-[150px] rounded-full animate-pulse [animation-delay:2s]"></div>
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40%] h-[40%] bg-gradient-to-r from-indigo-600/10 to-violet-600/10 blur-[120px] rounded-full animate-pulse [animation-delay:4s]"></div>
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+        
+        {/* Floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`
+            }}
+          />
+        ))}
       </div>
 
       {/* Header */}
-      <header className="h-16 border-b border-white/10 bg-[#0a0a0a]/80 backdrop-blur-md flex items-center justify-between px-6 shrink-0 z-50">
+      <header className="h-16 border-b border-white/10 bg-[#0a0a0a]/90 backdrop-blur-xl flex items-center justify-between px-6 shrink-0 z-50 relative">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 animate-pulse">
             <LayoutDashboard size={22} className="text-white" />
           </div>
           <div>
-            <h1 className="font-black text-lg tracking-tight leading-none">DASHBOARD</h1>
-            <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-1">Multi-Purpose Hub</p>
+            <h1 className="font-black text-lg tracking-tight leading-none bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">DASHBOARD</h1>
+            <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mt-1">Multi-Purpose Hub</p>
           </div>
         </div>
 
@@ -533,16 +584,34 @@ export default function App() {
                     if (widget.id === 'hero') {
                       return (
                         <div key="hero" className={cn(
-                          "p-8 rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 border border-white/10 shadow-2xl shadow-blue-500/10 relative overflow-hidden group",
+                          "p-8 rounded-3xl bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 border border-white/10 shadow-2xl shadow-blue-500/20 relative overflow-hidden group",
                           widget.width === '1' ? 'lg:col-span-1' : widget.width === '2' ? 'lg:col-span-2' : 'lg:col-span-3'
                         )}>
+                          {/* HD Background Image with overlay */}
+                          <div 
+                            className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-700"
+                            style={{ backgroundImage: `url(${HD_BACKGROUNDS.hero})` }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 via-purple-600/80 to-pink-600/80"></div>
+                          
+                          {/* Animated decorative elements */}
                           <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:opacity-20 transition-opacity">
                             <Clock size={200} />
                           </div>
+                          <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-pulse"></div>
+                          <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-purple-500/10 rounded-full blur-xl animate-pulse [animation-delay:1s]"></div>
+                          
                           <div className="relative z-10">
-                            <p className="text-blue-200 font-bold uppercase tracking-[0.2em] text-xs mb-4">Current Time & Date</p>
-                            <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-2">{formatTime(currentTime)}</h2>
-                            <p className="text-xl text-blue-100 font-medium">{formatDate(currentTime)}</p>
+                            <p className="text-blue-200 font-bold uppercase tracking-[0.2em] text-xs mb-4 flex items-center gap-2">
+                              <Sparkles size={12} className="text-yellow-300" />
+                              Current Time & Date
+                              <Sparkles size={12} className="text-yellow-300" />
+                            </p>
+                            <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-2 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">{formatTime(currentTime)}</h2>
+                            <p className="text-xl text-blue-100 font-medium flex items-center gap-2">
+                              <Calendar size={16} />
+                              {formatDate(currentTime)}
+                            </p>
                           </div>
                         </div>
                       );
@@ -550,26 +619,32 @@ export default function App() {
                     if (widget.id === 'weather') {
                       return (
                         <div key="weather" className={cn(
-                          "p-8 rounded-3xl bg-[#141414] border border-white/10 flex flex-col justify-between group",
+                          "p-8 rounded-3xl bg-[#141414] border border-white/10 flex flex-col justify-between group hover:border-blue-500/30 transition-all duration-300",
                           widget.width === '1' ? 'lg:col-span-1' : widget.width === '2' ? 'lg:col-span-2' : 'lg:col-span-3'
                         )}>
-                          <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest">Weather Summary</h3>
-                            <button onClick={() => fetchWeather(userLocation || undefined)} className="p-2 hover:bg-white/5 rounded-lg transition-all text-gray-500 hover:text-white">
-                              <RefreshCcw size={16} />
+                          {/* Subtle background pattern */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                          
+                          <div className="flex items-center justify-between mb-6 relative z-10">
+                            <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                              <Cloud size={14} className="text-blue-500" />
+                              Weather Summary
+                            </h3>
+                            <button onClick={() => fetchWeather(userLocation || undefined)} className="p-2 hover:bg-blue-500/10 rounded-lg transition-all text-gray-500 hover:text-blue-500">
+                              <RefreshCcw size={16} className="group-hover:rotate-180 transition-transform duration-500" />
                             </button>
                           </div>
                           {weatherData ? (
-                            <div className="space-y-4">
+                            <div className="space-y-4 relative z-10">
                               <div className="flex items-center gap-4">
-                                <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500">
-                                  {weatherData.icon === 'sun' && <Sun size={32} />}
+                                <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center text-blue-400 border border-blue-500/20 shadow-lg shadow-blue-500/10">
+                                  {weatherData.icon === 'sun' && <Sun size={32} className="animate-pulse" />}
                                   {weatherData.icon === 'cloud' && <Cloud size={32} />}
                                   {weatherData.icon === 'rain' && <CloudRain size={32} />}
                                   {weatherData.icon === 'lightning' && <CloudLightning size={32} />}
                                 </div>
                                 <div>
-                                  <p className="text-4xl font-black">{weatherData.temp}</p>
+                                  <p className="text-4xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{weatherData.temp}</p>
                                   <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">{weatherData.condition}</p>
                                 </div>
                               </div>
@@ -585,7 +660,7 @@ export default function App() {
                           )}
                           <button 
                             onClick={() => setActiveTab('weather')}
-                            className="mt-6 w-full py-3 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2"
+                            className="mt-6 w-full py-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 hover:from-blue-500/20 hover:to-cyan-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 border border-blue-500/20 hover:border-blue-500/40"
                           >
                             View Full Forecast <ChevronRight size={14} />
                           </button>
@@ -714,24 +789,44 @@ export default function App() {
                           widget.width === '1' ? 'lg:col-span-1' : widget.width === '2' ? 'lg:col-span-2' : 'lg:col-span-3'
                         )}>
                           <div className="flex items-center justify-between">
-                            <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest">Top News</h3>
-                            <button onClick={() => setActiveTab('news')} className="text-xs font-bold text-blue-500 hover:underline">View All</button>
+                            <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                              <Newspaper size={14} className="text-blue-500" />
+                              Top News
+                            </h3>
+                            <button onClick={() => setActiveTab('news')} className="text-xs font-bold text-blue-500 hover:underline flex items-center gap-1">
+                              View All <ArrowRight size={12} />
+                            </button>
                           </div>
                           <div className={cn(
                             "grid gap-4",
                             widget.width === '1' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
                           )}>
                             {newsItems.slice(0, 2).map((news) => (
-                              <div key={news.id} className="bg-[#141414] border border-white/10 rounded-2xl overflow-hidden group hover:border-blue-500/30 transition-all">
-                                <div className="h-32 overflow-hidden">
-                                  <img src={news.image} alt={news.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
+                              <div key={news.id} className="bg-[#141414] border border-white/10 rounded-2xl overflow-hidden group hover:border-blue-500/30 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/5">
+                                <div className="h-40 overflow-hidden relative">
+                                  {/* HD Image with enhanced hover effect */}
+                                  <img 
+                                    src={news.image} 
+                                    alt={news.title} 
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                                    referrerPolicy="no-referrer" 
+                                  />
+                                  {/* Gradient overlay on hover */}
+                                  <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-60"></div>
+                                  <div className="absolute top-3 left-3">
+                                    <span className="px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[8px] font-black uppercase tracking-tighter rounded-full shadow-lg shadow-blue-500/30">{news.category}</span>
+                                  </div>
                                 </div>
                                 <div className="p-4">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black uppercase tracking-tighter rounded border border-blue-500/20">{news.category}</span>
-                                    <span className="text-[8px] text-gray-500 font-bold uppercase">{news.source}</span>
+                                    <span className="px-2 py-0.5 bg-blue-500/10 text-blue-400 text-[8px] font-black uppercase tracking-tighter rounded border border-blue-500/20">{news.category}</span>
+                                    <span className="text-[8px] text-gray-500 font-bold uppercase flex items-center gap-1">
+                                      <Clock size={8} />
+                                      {news.source}
+                                    </span>
                                   </div>
-                                  <h4 className="font-bold text-sm text-white line-clamp-2 group-hover:text-blue-400 transition-colors">{news.title}</h4>
+                                  <h4 className="font-bold text-sm text-white line-clamp-2 group-hover:text-blue-400 transition-colors leading-relaxed">{news.title}</h4>
+                                  <p className="text-[10px] text-gray-500 mt-2 line-clamp-2">{news.summary}</p>
                                 </div>
                               </div>
                             ))}
@@ -745,22 +840,25 @@ export default function App() {
                           "space-y-4",
                           widget.width === '1' ? 'lg:col-span-1' : widget.width === '2' ? 'lg:col-span-2' : 'lg:col-span-3'
                         )}>
-                          <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest">Quick Actions</h3>
+                          <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                            <Zap size={14} className="text-yellow-500" />
+                            Quick Actions
+                          </h3>
                           <div className={cn(
                             "grid gap-3",
                             widget.width === '1' ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-4'
                           )}>
                             {[
-                              { label: 'Calendar', icon: <Calendar size={20} />, color: 'bg-orange-500' },
-                              { label: 'Messages', icon: <MessageSquare size={20} />, color: 'bg-green-500' },
-                              { label: 'Network', icon: <Network size={20} />, color: 'bg-purple-500' },
-                              { label: 'Search', icon: <Search size={20} />, color: 'bg-blue-500' },
+                              { label: 'Calendar', icon: <Calendar size={20} />, color: 'bg-gradient-to-br from-orange-500 to-red-500', hoverColor: 'hover:from-orange-600 hover:to-red-600' },
+                              { label: 'Messages', icon: <MessageSquare size={20} />, color: 'bg-gradient-to-br from-green-500 to-emerald-500', hoverColor: 'hover:from-green-600 hover:to-emerald-600' },
+                              { label: 'Network', icon: <Network size={20} />, color: 'bg-gradient-to-br from-purple-500 to-pink-500', hoverColor: 'hover:from-purple-600 hover:to-pink-600' },
+                              { label: 'Search', icon: <Search size={20} />, color: 'bg-gradient-to-br from-blue-500 to-cyan-500', hoverColor: 'hover:from-blue-600 hover:to-cyan-600' },
                             ].map((action) => (
-                              <button key={action.label} className="p-4 bg-[#141414] border border-white/10 rounded-2xl flex flex-col items-center gap-3 hover:bg-white/5 transition-all group">
-                                <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform", action.color)}>
+                              <button key={action.label} className="p-4 bg-[#141414] border border-white/10 rounded-2xl flex flex-col items-center gap-3 hover:bg-white/5 transition-all group hover:border-white/20">
+                                <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300", action.color, action.hoverColor)}>
                                   {action.icon}
                                 </div>
-                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{action.label}</span>
+                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">{action.label}</span>
                               </button>
                             ))}
                           </div>
@@ -781,20 +879,31 @@ export default function App() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-3xl font-black tracking-tight">News Feed</h2>
-                    <p className="text-sm text-gray-500">Stay updated with the latest global events.</p>
+                {/* HD Background Banner */}
+                <div className="relative h-48 rounded-3xl overflow-hidden mb-8">
+                  <img 
+                    src={HD_BACKGROUNDS.news} 
+                    alt="News Background" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-purple-900/80 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-8">
+                    <h2 className="text-4xl font-black tracking-tight text-white mb-2 flex items-center gap-3">
+                      <Newspaper size={36} className="text-blue-400" />
+                      News Feed
+                    </h2>
+                    <p className="text-sm text-gray-300">Stay updated with the latest global events.</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
-                      <input 
-                        type="text" 
-                        placeholder="Search news..." 
-                        className="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 transition-all w-64"
-                      />
-                    </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
+                    <input 
+                      type="text" 
+                      placeholder="Search news..." 
+                      className="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500/50 transition-all w-64 placeholder:text-gray-600"
+                    />
                   </div>
                 </div>
 
@@ -802,24 +911,33 @@ export default function App() {
                   {newsItems.map((news) => (
                     <motion.div
                       key={news.id}
-                      whileHover={{ y: -5 }}
-                      className="bg-[#141414] border border-white/10 rounded-3xl overflow-hidden shadow-xl group"
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      className="bg-[#141414] border border-white/10 rounded-3xl overflow-hidden shadow-xl group hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-500/30 transition-all duration-300"
                     >
-                      <div className="h-48 overflow-hidden relative">
+                      <div className="h-52 overflow-hidden relative">
                         <img src={news.image} alt={news.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-80"></div>
                         <div className="absolute top-4 left-4">
-                          <span className="px-3 py-1 bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-lg shadow-lg">{news.category}</span>
+                          <span className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-black uppercase tracking-widest rounded-lg shadow-lg shadow-blue-500/30">{news.category}</span>
+                        </div>
+                        <div className="absolute top-4 right-4">
+                          <button className="p-2 bg-black/30 backdrop-blur-sm rounded-full text-white/70 hover:text-white hover:bg-blue-500/50 transition-all">
+                            <Bookmark size={16} />
+                          </button>
                         </div>
                       </div>
                       <div className="p-6 space-y-4">
                         <div className="flex items-center justify-between text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                          <span>{news.source}</span>
+                          <span className="flex items-center gap-2">
+                            <Clock size={12} />
+                            {news.source}
+                          </span>
                           <span>{new Date(news.timestamp).toLocaleDateString()}</span>
                         </div>
-                        <h3 className="text-xl font-bold text-white leading-tight group-hover:text-blue-400 transition-colors">{news.title}</h3>
+                        <h3 className="text-xl font-bold text-white leading-tight group-hover:text-blue-400 transition-colors line-clamp-2">{news.title}</h3>
                         <p className="text-sm text-gray-400 line-clamp-3 leading-relaxed">{news.summary}</p>
-                        <button className="w-full py-3 bg-white/5 hover:bg-blue-500 hover:text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2">
-                          Read Full Article <ExternalLink size={14} />
+                        <button className="w-full py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 border border-blue-500/20 hover:border-blue-500/40 group/btn">
+                          Read Full Article <ExternalLink size={14} className="group-hover/btn:translate-x-1 transition-transform" />
                         </button>
                       </div>
                     </motion.div>
@@ -834,22 +952,43 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="max-w-4xl mx-auto space-y-8"
+                className="space-y-8"
               >
-                <div className="text-center space-y-2">
-                  <h2 className="text-4xl font-black tracking-tight">Weather Forecast</h2>
-                  <p className="text-gray-500">Detailed atmospheric conditions for your area.</p>
+                {/* HD Background Banner */}
+                <div className="relative h-56 rounded-3xl overflow-hidden mb-8">
+                  <img 
+                    src={HD_BACKGROUNDS.weather} 
+                    alt="Weather Background" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-cyan-900/80 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-8">
+                    <h2 className="text-4xl font-black tracking-tight text-white mb-2 flex items-center gap-3">
+                      <Cloud size={36} className="text-cyan-400" />
+                      Weather Forecast
+                    </h2>
+                    <p className="text-sm text-gray-300">Detailed atmospheric conditions for your area.</p>
+                  </div>
+                  {/* Animated weather icons in background */}
+                  <div className="absolute top-8 right-8 flex gap-4">
+                    <Sun size={48} className="text-yellow-400/30 animate-pulse" />
+                    <Cloud size={48} className="text-gray-400/30" />
+                    <CloudRain size={48} className="text-blue-400/30" />
+                  </div>
                 </div>
 
                 {weatherData ? (
                   <div className="space-y-6">
-                    <div className="p-10 rounded-[40px] bg-gradient-to-br from-blue-600 to-indigo-700 border border-white/10 shadow-2xl relative overflow-hidden group">
+                    <div className="p-10 rounded-[40px] bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 border border-white/10 shadow-2xl relative overflow-hidden group">
+                      {/* Animated background elements */}
                       <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:opacity-20 transition-opacity">
                         {weatherData.icon === 'sun' && <Sun size={240} />}
                         {weatherData.icon === 'cloud' && <Cloud size={240} />}
                         {weatherData.icon === 'rain' && <CloudRain size={240} />}
                         {weatherData.icon === 'lightning' && <CloudLightning size={240} />}
                       </div>
+                      <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+                      <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl animate-pulse [animation-delay:1s]"></div>
                       
                       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                         <div className="text-center md:text-left space-y-4">
@@ -857,7 +996,7 @@ export default function App() {
                             <MapPin size={20} />
                             <span className="text-xl font-bold">{weatherData.location}</span>
                           </div>
-                          <h3 className="text-8xl font-black tracking-tighter">{weatherData.temp}</h3>
+                          <h3 className="text-8xl font-black tracking-tighter bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">{weatherData.temp}</h3>
                           <p className="text-2xl font-bold text-blue-100 uppercase tracking-[0.2em]">{weatherData.condition}</p>
                         </div>
 
@@ -868,10 +1007,10 @@ export default function App() {
                             { label: 'Wind Speed', value: weatherData.windSpeed, icon: <Wind size={20} /> },
                             { label: 'UV Index', value: 'Low', icon: <Sun size={20} /> },
                           ].map((stat) => (
-                            <div key={stat.label} className="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-2xl flex flex-col items-center gap-2 min-w-[120px]">
+                            <div key={stat.label} className="bg-white/10 backdrop-blur-md border border-white/10 p-4 rounded-2xl flex flex-col items-center gap-2 min-w-[120px] hover:bg-white/15 transition-all hover:scale-105">
                               <div className="text-blue-200">{stat.icon}</div>
                               <p className="text-[10px] font-black uppercase tracking-widest text-blue-200/60">{stat.label}</p>
-                              <p className="text-lg font-bold">{stat.value}</p>
+                              <p className="text-lg font-bold text-white">{stat.value}</p>
                             </div>
                           ))}
                         </div>
@@ -880,13 +1019,13 @@ export default function App() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       {['Tomorrow', 'Wednesday', 'Thursday'].map((day, i) => (
-                        <div key={day} className="bg-[#141414] border border-white/10 p-6 rounded-3xl flex flex-col items-center gap-4 hover:border-blue-500/30 transition-all">
-                          <p className="text-sm font-black uppercase tracking-widest text-gray-500">{day}</p>
-                          <div className="text-blue-500">
-                            {i === 0 ? <Cloud size={48} /> : i === 1 ? <Sun size={48} /> : <CloudRain size={48} />}
+                        <div key={day} className="bg-[#141414] border border-white/10 p-6 rounded-3xl flex flex-col items-center gap-4 hover:border-blue-500/30 transition-all group hover:shadow-xl hover:shadow-blue-500/5">
+                          <p className="text-sm font-black uppercase tracking-widest text-gray-500 group-hover:text-blue-400 transition-colors">{day}</p>
+                          <div className="text-blue-500 group-hover:scale-110 transition-transform">
+                            {i === 0 ? <Cloud size={48} /> : i === 1 ? <Sun size={48} className="animate-pulse" /> : <CloudRain size={48} />}
                           </div>
                           <div className="text-center">
-                            <p className="text-2xl font-black">{22 + i}°C</p>
+                            <p className="text-2xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{22 + i}°C</p>
                             <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{i === 0 ? 'Partly Cloudy' : i === 1 ? 'Sunny' : 'Light Rain'}</p>
                           </div>
                         </div>

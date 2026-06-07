@@ -7,7 +7,7 @@
   --font-headline: "Space Grotesk", sans-serif;
   --font-label: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-
+  
   --color-surface: #0e0e0e;
   --color-surface-container-low: #131313;
   --color-surface-container-high: #201f1f;
@@ -51,7 +51,53 @@
   .glow-orange {
     filter: drop-shadow(0 0 15px rgba(255, 143, 112, 0.5));
   }
+  .glow-blue {
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+  }
+  .glow-purple {
+    filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.5));
+  }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+  .card-glow {
+    @apply relative;
+  }
+  .card-glow::before {
+    content: '';
+    @apply absolute -inset-px bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-sm;
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite 3s;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  background-size: 1000px 100%;
 }
